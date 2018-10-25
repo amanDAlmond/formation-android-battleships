@@ -4,6 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
     tools:context="com.excilys.formation.battleships.android.ui.PlayerNameActivity">
-    
+
+    <EditText
+        android:id="@+id/player_name_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:hint="@string/enter_name_hint" />
+
+    <Button
+        android:id="@+id/example_btn_name"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/player_name_input"
+        android:onClick="onClickButton"
+        android:text="@string/button_enter_name" />
+
 </LinearLayout>
