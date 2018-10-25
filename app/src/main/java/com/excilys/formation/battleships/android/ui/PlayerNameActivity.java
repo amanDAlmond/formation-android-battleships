@@ -26,6 +26,7 @@ public class PlayerNameActivity extends AppCompatActivity {
             Toast.makeText(PlayerNameActivity.this, "Veuillez entrer un nom.", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(PlayerNameActivity.this, "Bienvenu, " + name + " !", Toast.LENGTH_LONG).show();
+            BattleShipsApplication.getGame().init(name);
         }
     }
 }
