@@ -198,6 +198,8 @@ public class BoardGridFragment extends Fragment {
      */
     public interface BoardGridFragmentListener {
         void onTileClick(int id, int x, int y);
+
+        void OnBackPressed();
     }
 
     /* ***

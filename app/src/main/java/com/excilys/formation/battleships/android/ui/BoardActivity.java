@@ -32,6 +32,12 @@ public class BoardActivity extends AppCompatActivity implements BoardGridFragmen
             doPlayerTurn(x, y);
         }
     }
+    @Override
+    public void OnBackPressed() {
+        Intent intent = new Intent( this, PlayerNameActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
 
     /* ***
      * Widgets

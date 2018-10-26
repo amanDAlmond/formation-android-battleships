@@ -18,6 +18,12 @@ import battleships.ship.AbstractShip;
 
 public class PutShipsActivity extends AppCompatActivity implements BoardGridFragment.BoardGridFragmentListener {
     private static final String TAG = PutShipsActivity.class.getSimpleName();
+    @Override
+    public void OnBackPressed() {
+        Intent intent = new Intent( this, PlayerNameActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
 
     /* ***
      * Widgets
