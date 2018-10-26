@@ -1,6 +1,9 @@
 package com.excilys.formation.battleships.android.ui;
 
 import android.app.Application;
+import android.content.Intent;
+
+import com.excilys.formation.battleships.android.ui.ships.DrawableBattleship;
 
 import java.util.Arrays;
 import java.util.List;
@@ -76,7 +79,7 @@ public class BattleShipsApplication extends Application {
             mBoard = new BoardController(b);
             mOpponentBoard = new Board("IA");
 
-            mPlayer1 = new Player(playerName, b, mOpponentBoard, createDefaultShips());
+            mPlayer1 = new AndroidPlayer(playerName, b, mOpponentBoard, createDefaultShips());
             mPlayer2 = new AIPlayer(playerName, mOpponentBoard, b, createDefaultShips());
 
             // place player ships
@@ -90,21 +93,26 @@ public class BattleShipsApplication extends Application {
         private List<AbstractShip> createDefaultShips() {
             AbstractShip[] ships = new AbstractShip[0];
 
-            // TODO uncomment me
             // ships = new AbstractShip[]{new DrawableDestroyer(), new DrawableSubmarine(), new DrawableSubmarine(), new DrawableBattleship(), new DrawableCarrier()};
+            ships = new AbstractShip[]{new DrawableBattleship()};
             return Arrays.asList(ships);
         }
     }
 
 
-    // TODO inherit from Player
-    public class AndroidPlayer {
+    public class AndroidPlayer extends Player {
 
         public AndroidPlayer(String name, Board board, Board opponentBoard, List<AbstractShip> ships) {
-            //TODO call Players's constructor
+            super(name, board, opponentBoard, ships);
         }
 
-        //TODO insert putShips() here by overriding player's method
+        @Override
+        public void putShips() {
+            Intent launchAndroidPlayerPutShips = new Intent(BattleShipsApplication.this, PutShipsActivity.class);
+            launchAndroidPlayerPutShips.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+            startActivity(launchAndroidPlayerPutShips);
+        }
     }
 
 }
