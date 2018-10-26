@@ -4,6 +4,7 @@ import com.excilys.formation.battleships.android.ui.ships.DrawableShip;
 
 import battleships.Hit;
 import battleships.IBoard;
+import battleships.ShipException;
 import battleships.formation.excilys.com.battleships.R;
 import battleships.ship.AbstractShip;
 
@@ -55,9 +56,9 @@ public class BoardController implements IBoard {
     }
 
     @Override
-    public void putShip(AbstractShip ship, int x, int y) {
+    public void putShip(AbstractShip ship, int x, int y) throws ShipException {
         if (!(ship instanceof DrawableShip)) {
-            throw new IllegalArgumentException("Cannot put a Ship that does not implement DrawableShip.");
+            throw new ShipException("Cannot put a Ship that does not implement DrawableShip.");
         }
 
         AbstractShip.Orientation orientation = ship.getOrientation();
