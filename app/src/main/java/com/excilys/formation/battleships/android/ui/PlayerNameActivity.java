@@ -12,12 +12,16 @@ import battleships.formation.excilys.com.battleships.R;
 public class PlayerNameActivity extends AppCompatActivity {
 
     private EditText mPlayerNameInput;
-    // private SharedPreferences preferences;
+    private SharedPreferences preferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        preferences = getApplicationContext().getSharedPreferences("Pref", MODE_PRIVATE);
+        String lastPlayer = preferences.getString("lastPlayer",null);
+
         setContentView(R.layout.activity_player_name);
         mPlayerNameInput = (EditText) findViewById(R.id.player_name_input);
+        mPlayerNameInput.setText(lastPlayer);
     }
 
     public void onClickButton(View v) {
@@ -26,6 +30,7 @@ public class PlayerNameActivity extends AppCompatActivity {
             Toast.makeText(PlayerNameActivity.this, "Veuillez entrer un nom.", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(PlayerNameActivity.this, "Bienvenue, " + name + " !", Toast.LENGTH_LONG).show();
+            preferences.edit().putString("lastPlayer", name).apply();
             BattleShipsApplication.getGame().init(name);
         }
     }
