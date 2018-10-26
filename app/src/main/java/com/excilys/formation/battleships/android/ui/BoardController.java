@@ -46,8 +46,7 @@ public class BoardController implements IBoard {
 
     @Override
     public Hit sendHit(int x, int y) {
-        // TODO decor me
-        return null;
+        return mBoard.sendHit(x, y);
     }
 
     @Override
@@ -61,35 +60,35 @@ public class BoardController implements IBoard {
             throw new IllegalArgumentException("Cannot put a Ship that does not implement DrawableShip.");
         }
 
-        // TODO Retrieve ship orientation
+        AbstractShip.Orientation orientation = ship.getOrientation();
 
+        // This adjusts the arithmetic for ships facing the other way, so that they dont start on the tile adjacent to where the player tapped.
+        switch (orientation) {
+            case NORTH:
+                y = y - ship.getLength() + 1;
+                break;
+            case WEST:
+                x = x - ship.getLength() + 1;
+                break;
 
-        // TODO this may be usefull
-//        switch (orientation) {
-//            case NORTH:
-//                y = y - ship.getLength() + 1;
-//                break;
-//            case WEST:
-//                x = x - ship.getLength() + 1;
-//                break;
-//
-//        }
+        }
+        mShipsFragment.putDrawable(((DrawableShip) ship).getDrawable(), x, y);
     }
 
     @Override
     public boolean hasShip(int x, int y) {
-        // TODO
-        return false;
+        return mBoard.hasShip(x, y);
     }
 
     @Override
     public void setHit(boolean hit, int x, int y) {
-        // TODO decore me
+        mHitsFragment.putDrawable(hit ? R.drawable.hit : R.drawable.miss, x, y);
+
+        mBoard.setHit(hit, x, y);
     }
 
     @Override
     public Boolean getHit(int x, int y) {
-        // TODO
-        return false;
+        return mBoard.getHit(x, y);
     }
 }
